@@ -2,15 +2,16 @@ import { initServer } from "./server/index.js";
 import { env } from "./shared/utils/env.js";
 import { logger } from "./shared/utils/logger.js";
 import "./tracer.js";
+import { initWorker } from "./worker/index.js";
 
 const main = async () => {
     if (env.ENGINE_MODE == 'server_only'){
         initServer();
     } else if (env.ENGINE_MODE == 'worker_only'){
-        // TODO: init worker
+        initWorker();
     } else {
         initServer();
-        // TODO: init worker
+        initWorker();
     }
 }
 
