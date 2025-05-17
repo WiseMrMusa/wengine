@@ -1,7 +1,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { env } from "../shared/utils/env";
-import { logger } from "../shared/utils/logger";
+import { env } from '../shared/utils/env.js';
+import { logger } from '../shared/utils/logger.js';
 import fastify, {type FastifyInstance} from "fastify";
 import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 
@@ -83,5 +83,3 @@ export const initServer = async () => {
    })
     }
 }
-
-
