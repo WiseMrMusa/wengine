@@ -20,11 +20,19 @@
   },
   "dependencies": {
     "@fastify/type-provider-typebox": "^5.1.0",
+    "@prisma/client": "^6.8.2",
+    "@sinclair/typebox": "^0.34.33",
     "@t3-oss/env-core": "^0.13.4",
     "dd-trace": "^5.52.0",
     "dotenv": "^16.5.0",
     "fastify": "^5.3.3",
+    "knex": "^3.1.0",
+    "prisma": "^6.8.2",
+    "thirdweb": "^5.99.2",
     "winston": "^3.17.0",
     "zod": "^3.24.4"
+  },
+  "prisma": {
+    "schema": "./src/prisma/schema.prisma"
   }
 }

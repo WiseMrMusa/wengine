@@ -31,13 +31,13 @@ model Configuration {
     // Contract Indexer Updates
     indexerListenerCronSchedule             String? @map("indexerListenerCronSchedule")
     maxBlocksToIndex                        Int     @default(25) @map("maxBlocksToIndex")
-    cursorDelaySeconds                      Int     @default(2) @map("cursorDelaySeconds)
-    contractSubscriptionsRetryDelaySeconds  String  @default("10") @map("contractSubscriptionsRetryDelaySeconds)
+    cursorDelaySeconds                      Int     @default(2) @map("cursorDelaySeconds")
+    contractSubscriptionsRetryDelaySeconds  String  @default("10") @map("contractSubscriptionsRetryDelaySeconds")
 
     walletSubscriptionsCronSchedule         String? @map("walletSubscriptionsCronSchedule")
 
     // Wallet provider specific configurations, non-credential
-    walletProviderConfigs                   Json @default({}) @map("walletProviderConfigs")
+    walletProviderConfigs                   Json @default("{}") @map("walletProviderConfigs") /// Eg: { "aws": { "defaultAwsRegion": "us-east-1" }, "gcp": { "defaultGcpKmsLocationId": "us-east1-b" } }
 
     // Legacy wallet provider credentials
     // Use default credentials instead, and store non-credential waller provider configurations in walletProviderConfigs
@@ -74,7 +74,7 @@ model Configuration {
     @@map("configuration")
 }
 
-mode Permissions {
+model Permissions {
     walletAddress   String @id @map("walletAddress")
     permissions     String @map("permissions")
     label           String? @map("label")
@@ -286,8 +286,8 @@ model ContractEventLogs {
     eventName           String?
     decodedLog          Json?
     timestamp           DateTime    
-    transactionIndex    Int?
-    logIndex            Int?
+    transactionIndex    Int
+    logIndex            Int
     createdAt           DateTime @default(now())
     updatedAt           DateTime @updatedAt
     deletedAt           DateTime?
@@ -347,7 +347,7 @@ model ContractTransactionReceipts {
     createdAt           DateTime @default(now())
     updatedAt           DateTime @updatedAt
 
-    @@index([chainId, transactionHash])
+    @@unique([chainId, transactionHash])
     @@index([contractId, timestamp])
     @@index([contractId, blockNumber])
     @@map("contract_transaction_receipts")
